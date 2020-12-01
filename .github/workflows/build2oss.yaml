@@ -39,4 +39,4 @@ jobs:
 
       # 发布到阿里云OSS，
       - name: cp files to aliyun
-        run: ossutil cp -rf ./dist oss://github/lucksheet
+        run: ossutil cp -rf ./dist oss://smartify-ui/github/lucksheet
