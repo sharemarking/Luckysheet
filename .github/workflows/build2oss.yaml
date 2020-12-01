@@ -29,14 +29,11 @@ jobs:
           npm run build
         env:
           CI: true
-      # 设置阿里云OSS的 id/secret，存储到 github 的 secrets 中
-      - name: setup aliyun oss
-        uses: manyuanrong/setup-ossutil@v2.0
-        with:
-          endpoint: oss-cn-hangzhou
-          access-key-id: ${{ secrets.ACCESSKEY_ID }}
-          access-key-secret: ${{ secrets.ACCESSKEY_SECRET }}
 
-      # 发布到阿里云OSS，
-      - name: cp files to aliyun
-        run: ossutil cp dist oss://smartify-ui/ -rf
+        # 发布到阿里云OSS，
+        uses: doggycool/ossutil-github-action@master
+        with:
+          ossArgs: 'cp -r -u ./dist oss://smartify-ui/github/luckysheet'
+          accessKey: ${{ secrets.smartify-ui }}
+          accessSecret: ${{ secrets.smartify-ui }}
+          endpoint: oss-cn-beijing
