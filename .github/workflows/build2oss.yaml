@@ -30,10 +30,26 @@ jobs:
         env:
           CI: true
 
+
+
+
         # 发布到阿里云OSS，
-        uses: doggycool/ossutil-github-action@master
-        with:
-          ossArgs: 'cp -r -u ./dist oss://smartify-ui/github/luckysheet'
-          accessKey: ${{ secrets.smartify-ui }}
-          accessSecret: ${{ secrets.smartify-ui }}
-          endpoint: oss-cn-beijing
+            - uses: manyuanrong/setup-ossutil@v1.0
+                with:
+                  # endpoint 可以去oss控制台上查看
+                  endpoint: "oss-cn-beijing"
+                  # 使用我们之前配置在secrets里面的accesskeys来配置ossutil
+                  access-key-id: ${{ secrets.ACCESSKEY_ID}}
+                  access-key-secret: ${{ secrets.ACCESSKEY_SECRET }}
+
+             - name: Deply To OSS
+               run: ossutil cp ./dist oss://smartify-ui/ -rf
+
+
+
+#        uses: doggycool/ossutil-github-action@master
+#        with:
+#          ossArgs: 'cp -r -u ./dist oss://smartify-ui/github/luckysheet'
+#          accessKey: ${{ secrets.smartify-ui }}
+#          accessSecret: ${{ secrets.smartify-ui }}
+#          endpoint: oss-cn-beijing
