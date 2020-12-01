@@ -1,21 +1,28 @@
-ali_oss_deploy:
-  runs-on: ubuntu-latest
-  name: Deploy Pages to Ali OSS
-  steps:
-    - name: Checkout
-      uses: actions/checkout@master
-    - run: npm install
-    - run: npm install gulp -g
-    - run: npm build
-    - name: Deploy
-      id: DeployOss
-      uses: stevenzg/ali-oss-action@master
-      with:
-        region: 'oss-cn-beijing'
-        accessKeyId: ${{ secrets.ACCESSKEY_ID }}
-        accessKeySecret: ${{ secrets.ACCESSKEY_SECRET }}
-        bucket: 'smartify-ui'
-        bucketPath: '/lucklysheet/'
-        filePath: 'dist'
-    - name: Deploy Result
-      run: echo "${{ steps.DeployOss.outputs.successCount }} success, ${{ steps.DeployOss.outputs.failCount }} fail."
+name: 'deploy-to-ali-oss'
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  ali_oss_deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Pages to Ali OSS
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - run: npm install
+      - run: npm install gulp -g
+      - run: npm build
+      - name: Deploy
+        id: DeployOss
+        uses: stevenzg/ali-oss-action@master
+        with:
+          region: 'oss-cn-beijing'
+          accessKeyId: ${{ secrets.ACCESSKEY_ID }}
+          accessKeySecret: ${{ secrets.ACCESSKEY_SECRET }}
+          bucket: 'smartify-ui'
+          bucketPath: '/lucklysheet/'
+          filePath: 'dist'
+      - name: Deploy Result
+        run: echo "${{ steps.DeployOss.outputs.successCount }} success, ${{ steps.DeployOss.outputs.failCount }} fail."
