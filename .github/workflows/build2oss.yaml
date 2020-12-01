@@ -31,13 +31,11 @@ jobs:
           CI: true
       # 设置阿里云OSS的 id/secret，存储到 github 的 secrets 中
       - name: setup aliyun oss
-
-        uses: go-choppy/ossutil-github-action@master
+        uses: manyuanrong/setup-ossutil@master
         with:
-          ossArgs: 'cp -rf ./dist oss://github/lucksheet'
-          accessKey: ${{ secrets.ACCESSKEY_ID }}
-          accessSecret: ${{ secrets.ACCESSKEY_SECRET }}
-          endpoint: oss-cn-beijing.aliyuncs.com
+          endpoint: oss.aliyuncs.com
+          access-key-id: ${{ secrets.ACCESSKEY_ID }}
+          access-key-secret: ${{ secrets.ACCESSKEY_SECRET }}
 
       # 发布到阿里云OSS，
       - name: cp files to aliyun
