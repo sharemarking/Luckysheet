@@ -22,11 +22,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
+
       # npm install
       - name: npm install and build
         run: |
-          npm install
           npm install gulp -g
+          npm install
           npm run build
         env:
           CI: true
@@ -42,5 +43,7 @@ jobs:
           bucket: 'smartify-ui'
           bucketPath: '/lucklysheet/'
           filePath: 'dist'
+
+
       - name: Deploy Result
         run: echo "${{ steps.DeployOss.outputs.successCount }} success, ${{ steps.DeployOss.outputs.failCount }} fail."
