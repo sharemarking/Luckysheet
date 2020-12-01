@@ -41,7 +41,7 @@ jobs:
           accessKeyId: ${{ secrets.ACCESSKEY_ID }}
           accessKeySecret: ${{ secrets.ACCESSKEY_SECRET }}
           bucket: 'smartify-ui'
-          bucketPath: '/lucklysheet/'
+          bucketPath: '/github/lucklysheet/'
           filePath: 'dist'
 
 
