@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.1",
+    "ali-oss": "^6.11.2",
     "jspdf": "^2.1.1"
   },
   "scripts": {
@@ -41,7 +42,9 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "commit": "git-cz",
-    "release": "standard-version"
+    "release": "standard-version",
+    "git": "git add .&&git commit -m 更新代码 && git push",
+    "oss": "./utils/upload.oss.js"
   },
   "files": [
     "dist"
